@@ -3,6 +3,7 @@ import ProductCard from '../components/ProductCard'
 import VideoPlayer from '../components/VideoPlayer'
 import { ArrowIcon, InstagramIcon } from '../components/Icons'
 import { useStore } from '../context/StoreContext'
+import Img from '../components/Img'
 
 const MARQUEE = ['Heavyweight cotton', 'Screen printed', 'Small batches', 'Black & white only', 'Made to train in']
 
@@ -16,7 +17,7 @@ export default function Home() {
   return (
     <>
       <section className="hero">
-        {hero.image && <img className="hero-img" src={hero.image} alt="" fetchPriority="high" />}
+        {hero.image && <Img className="hero-img" src={hero.image} priority />}
         <div className="hero-shade" />
         <div className="hero-content">
           {hero.eyebrow && <p className="eyebrow">{hero.eyebrow}</p>}
@@ -74,11 +75,11 @@ export default function Home() {
 
       <section className="section container editorial">
         <Link to="/shop?category=Typography" className="editorial-tile">
-          <img src="/images/editorial-2.jpg" alt="" loading="lazy" />
+          <Img src="/images/editorial-2.jpg" sizes="(max-width: 860px) 100vw, 50vw" />
           <div className="editorial-label"><span>Typography</span><ArrowIcon /></div>
         </Link>
         <Link to="/shop?category=Graphic" className="editorial-tile dark">
-          <img src="/images/editorial-1.jpg" alt="" loading="lazy" />
+          <Img src="/images/editorial-1.jpg" sizes="(max-width: 860px) 100vw, 50vw" />
           <div className="editorial-label"><span>Graphic</span><ArrowIcon /></div>
         </Link>
       </section>

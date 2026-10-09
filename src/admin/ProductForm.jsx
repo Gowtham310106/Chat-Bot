@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { api, uploadFile } from '../lib/api'
+import { api } from '../lib/api'
+import { uploadFile } from '../lib/upload'
 import { useStore } from '../context/StoreContext'
+import Img from '../components/Img'
 
 const DEFAULT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 const EMPTY = {
@@ -116,7 +118,7 @@ export default function ProductForm() {
             <div className="image-grid">
               {form.images.map((img, i) => (
                 <div key={img + i} className="image-tile">
-                  <img src={img} alt="" />
+                  <Img src={img} sizes="160px" />
                   {i === 0 && <span className="tag">Main</span>}
                   <div className="image-tile-actions">
                     <button type="button" onClick={() => moveImage(i, -1)} disabled={i === 0} aria-label="Move left">←</button>

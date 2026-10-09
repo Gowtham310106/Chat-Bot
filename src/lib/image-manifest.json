@@ -1,0 +1,151 @@
+{
+  "/images/editorial-1.jpg": {
+    "w": [
+      600,
+      1200
+    ],
+    "ratio": 0.8
+  },
+  "/images/editorial-2.jpg": {
+    "w": [
+      600,
+      1200
+    ],
+    "ratio": 0.8
+  },
+  "/images/hero.jpg": {
+    "w": [
+      640,
+      1080,
+      1600,
+      2400
+    ],
+    "ratio": 1.7143
+  },
+  "/images/products/athletics-arch-tee-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/athletics-arch-tee-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/elite-core-tee-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/elite-core-tee-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/fuel-lift-repeat-tee-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/fuel-lift-repeat-tee-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/heavy-lifting-tee-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/heavy-lifting-tee-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/iron-club-oversized-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/iron-club-oversized-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/monochrome-stripe-tee-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/monochrome-stripe-tee-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/no-days-off-tee-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/no-days-off-tee-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/system-grid-tee-back.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/products/system-grid-tee-front.jpg": {
+    "w": [
+      400,
+      800
+    ],
+    "ratio": 0.8
+  },
+  "/images/video-poster-1.jpg": {
+    "w": [
+      540,
+      1080
+    ],
+    "ratio": 0.5625
+  },
+  "/images/video-poster-2.jpg": {
+    "w": [
+      540,
+      1080
+    ],
+    "ratio": 0.5625
+  }
+}

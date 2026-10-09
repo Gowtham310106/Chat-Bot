@@ -31,6 +31,3 @@ export async function api(path, { method = 'GET', body, admin = false, headers =
   }
   return data
 }
-
-export const uploadFile = (file) =>
-  api('/admin/upload', { method: 'POST', body: file, admin: true, headers: { 'Content-Type': file.type } }).then((r) => r.url)

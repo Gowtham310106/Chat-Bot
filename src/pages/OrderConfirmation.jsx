@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { api } from '../lib/api'
 import { formatMoney, PAYMENT_LABELS, STATUS_LABELS } from '../lib/format'
+import Img from '../components/Img'
 
 export default function OrderConfirmation() {
   const { id } = useParams()
@@ -27,7 +28,7 @@ export default function OrderConfirmation() {
       <div className="summary">
         {order.items.map((i) => (
           <div className="summary-line" key={`${i.productId}-${i.size}`}>
-            <div className="summary-img"><img src={i.image} alt="" /><span>{i.qty}</span></div>
+            <div className="summary-img"><Img src={i.image} sizes="64px" /><span>{i.qty}</span></div>
             <div><strong>{i.name}</strong><p className="muted small">{i.color} / {i.size}</p></div>
             <span>{money(i.price * i.qty)}</span>
           </div>

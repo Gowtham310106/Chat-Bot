@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { uploadFile } from '../lib/api'
+import { uploadFile } from '../lib/upload'
 
 // Upload a file or paste a URL; shows a preview of the current value.
 export default function MediaInput({ label, value, onChange, accept = 'image/*', kind = 'image', hint }) {

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from '../context/StoreContext'
 import { CloseIcon, MinusIcon, PlusIcon } from './Icons'
+import Img from './Img'
 
 export default function CartDrawer() {
   const { cart, cartOpen, setCartOpen, updateQty, money } = useStore()
@@ -43,7 +44,7 @@ export default function CartDrawer() {
             return (
               <div className="line" key={`${product.id}-${size}`}>
                 <Link to={`/product/${product.slug}`} onClick={() => setCartOpen(false)} className="line-img">
-                  <img src={product.images[0]} alt={product.name} />
+                  <Img src={product.images[0]} alt={product.name} sizes="88px" />
                 </Link>
                 <div className="line-info">
                   <div className="line-top">

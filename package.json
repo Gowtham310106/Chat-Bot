@@ -8,9 +8,11 @@
     "build": "vite build",
     "start": "node server/index.js",
     "lint": "eslint .",
-    "preview": "pnpm build && pnpm start"
+    "preview": "pnpm build && pnpm start",
+    "images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "@vercel/blob": "^2.8.1",
     "express": "^5.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -25,6 +27,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "sharp": "^0.35.5",
     "vite": "^7.0.4"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

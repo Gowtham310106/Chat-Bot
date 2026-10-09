@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { api } from '../lib/api'
 import { totalStock } from '../lib/format'
 import { useStore } from '../context/StoreContext'
+import Img from '../components/Img'
 
 export default function Products() {
   const { money, refresh } = useStore()
@@ -38,7 +39,7 @@ export default function Products() {
                 const stock = totalStock(p)
                 return (
                   <tr key={p.id}>
-                    <td className="thumb-cell">{p.images[0] ? <img src={p.images[0]} alt="" /> : <div className="img-placeholder" />}</td>
+                    <td className="thumb-cell">{p.images[0] ? <Img src={p.images[0]} sizes="48px" /> : <div className="img-placeholder" />}</td>
                     <td><Link to={`/admin/products/${p.id}`} className="strong">{p.name}</Link><div className="muted small">{p.color}{p.featured && ' · Featured'}</div></td>
                     <td>{p.category}</td>
                     <td className={stock === 0 ? 'warn' : ''}>{stock === 0 ? 'Sold out' : stock}</td>

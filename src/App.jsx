@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import StoreLayout from './components/StoreLayout'
 import Home from './pages/Home'
@@ -7,18 +8,21 @@ import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
 import About from './pages/About'
 import NotFound from './pages/NotFound'
-import AdminLayout from './admin/AdminLayout'
-import Login from './admin/Login'
-import Dashboard from './admin/Dashboard'
-import Products from './admin/Products'
-import ProductForm from './admin/ProductForm'
-import Orders from './admin/Orders'
-import OrderDetail from './admin/OrderDetail'
-import Content from './admin/Content'
-import Settings from './admin/Settings'
+
+// Admin code is split into its own chunks, so shoppers never download it.
+const AdminLayout = lazy(() => import('./admin/AdminLayout'))
+const Login = lazy(() => import('./admin/Login'))
+const Dashboard = lazy(() => import('./admin/Dashboard'))
+const Products = lazy(() => import('./admin/Products'))
+const ProductForm = lazy(() => import('./admin/ProductForm'))
+const Orders = lazy(() => import('./admin/Orders'))
+const OrderDetail = lazy(() => import('./admin/OrderDetail'))
+const Content = lazy(() => import('./admin/Content'))
+const Settings = lazy(() => import('./admin/Settings'))
 
 function App() {
   return (
+    <Suspense fallback={<div className="fullscreen-msg"><span className="loader" /></div>}>
     <Routes>
       <Route element={<StoreLayout />}>
         <Route index element={<Home />} />
@@ -41,6 +45,7 @@ function App() {
         <Route path="settings" element={<Settings />} />
       </Route>
     </Routes>
+    </Suspense>
   )
 }
 

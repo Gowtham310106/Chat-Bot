@@ -3,6 +3,7 @@ import { Link, NavLink, Navigate, Outlet, useLocation, useNavigate } from 'react
 import { api, getToken, setToken } from '../lib/api'
 import { useStore } from '../context/StoreContext'
 import { CloseIcon, MenuIcon } from '../components/Icons'
+import './admin.css'
 
 const NAV = [
   ['/admin', 'Dashboard', true],

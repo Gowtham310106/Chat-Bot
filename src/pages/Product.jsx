@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard'
 import { useStore } from '../context/StoreContext'
 import { totalStock } from '../lib/format'
 import NotFound from './NotFound'
+import Img from '../components/Img'
 
 export default function Product() {
   const { slug } = useParams()
@@ -35,12 +36,12 @@ function ProductView({ slug }) {
       <nav className="crumbs"><Link to="/shop">Shop</Link> / <Link to={`/shop?category=${product.category}`}>{product.category}</Link></nav>
       <div className="pdp">
         <div className="pdp-gallery">
-          <div className="pdp-main"><img src={product.images[active]} alt={product.name} /></div>
+          <div className="pdp-main"><Img src={product.images[active]} alt={product.name} sizes="(max-width: 860px) 100vw, 55vw" priority /></div>
           {product.images.length > 1 && (
             <div className="pdp-thumbs">
               {product.images.map((img, i) => (
                 <button key={img + i} className={i === active ? 'is-active' : ''} onClick={() => setActive(i)} aria-label={`View image ${i + 1}`}>
-                  <img src={img} alt="" />
+                  <Img src={img} sizes="120px" />
                 </button>
               ))}
             </div>

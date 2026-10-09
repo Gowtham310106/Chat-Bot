@@ -5,29 +5,54 @@ A black-and-white, minimal e-commerce site for printed shirts. It has a customer
 - **Frontend:** React 19, Vite, React Router
 - **Backend:** Express 5 with a JSON-file database (`data/db.json`) and local media uploads (`data/uploads/`)
 
-## Run it
+## Run it locally
 
 ```bash
 pnpm install
 pnpm dev              # storefront + API on http://localhost:5173
 ```
 
-Admin panel: http://localhost:5173/admin. The demo password is `admin123`.
+Admin panel: http://localhost:5173/admin. Local demo login: `admin` / `admin123`.
 
-For production:
+Locally, data is stored in `./data` (JSON files plus uploads). On Vercel it is stored in Vercel Blob.
+
+## Deploying on Vercel
+
+The site is configured for Vercel (`vercel.json`):
+
+- `dist/` is served as a static site from Vercel's CDN.
+- `api/[...path].js` is a single Vercel Function that runs the Express API.
+- Data is stored in **Vercel Blob**. The product catalog and settings are one JSON document, and each order is its own document. Writes use ETag checks so two checkouts can't overwrite each other's stock changes.
+
+Project environment variables:
+
+| Variable                | Purpose                                                          |
+| ----------------------- | ---------------------------------------------------------------- |
+| `ADMIN_USERNAME`        | Admin login username                                             |
+| `ADMIN_PASSWORD`        | Admin login password                                             |
+| `AUTH_SECRET`           | Random string used to sign admin sessions                        |
+| `DATA_PREFIX`           | Secret folder name in Blob for the catalog and orders. Keep it private. |
+| `BLOB_READ_WRITE_TOKEN` | Added automatically when the Blob store is connected             |
+
+Redeploy after changing environment variables.
+
+### Keeping CPU and bandwidth low
+
+- **Images:** every image in `public/images` ships as AVIF and WebP in several widths (`pnpm images` regenerates them) and is served with `srcset`, so phones download only a few KB. Vercel Image Optimization is not used, so images cost nothing at runtime.
+- **Admin uploads:** photos are resized and converted to WebP in the browser (a 2000px main image plus an 800px version) before upload. They go straight from the browser to Vercel Blob, so the function never handles file data.
+- **Videos:** a video starts downloading only when it scrolls near the screen and pauses when it scrolls away. Instagram and YouTube embeds load only after a visitor clicks play. Upload videos at 720p and under about 15 MB.
+- **API caching:** `GET /api/store` is cached at Vercel's CDN for 60 seconds, with stale-while-revalidate. Most visits never run the function, and admin changes show up on the storefront within about a minute.
+- **Static assets:** hashed JS and CSS are cached for a year; images are cached for 30 days.
+- **Bundle:** the admin panel and the Blob upload client are separate chunks that shoppers never download.
+
+## Running on your own server
 
 ```bash
 pnpm build
-ADMIN_PASSWORD='choose-a-strong-one' PORT=3000 pnpm start
+ADMIN_USERNAME=owner ADMIN_PASSWORD='strong-password' AUTH_SECRET='long-random-string' PORT=3000 pnpm start
 ```
 
-| Env var          | Default     | Purpose                                   |
-| ---------------- | ----------- | ----------------------------------------- |
-| `ADMIN_PASSWORD` | `admin123`  | Admin login. **Set this before going live.** |
-| `PORT`           | `3000`      | HTTP port for `pnpm start`                |
-| `DATA_DIR`       | `./data`    | Where the database and uploads are stored |
-
-The server writes to `DATA_DIR`, so host it somewhere with a persistent disk (a VPS, Render or Railway with a volume, etc.). Serverless hosts with read-only filesystems won't keep the data.
+Without `BLOB_READ_WRITE_TOKEN`, data is stored in `DATA_DIR` (default `./data`), so the server needs a persistent disk.
 
 ## Storefront
 
@@ -59,4 +84,4 @@ The images in `public/images/` are generated black-and-white mock-ups. To replac
 
 - **Online card payments.** Checkout takes orders as cash on delivery or bank transfer. To accept cards, connect a provider such as Stripe or Razorpay in `POST /api/orders`.
 - **Order emails.** Nothing is sent to customers or the store yet.
-- **Scale.** The JSON-file database suits a small shop. Move to Postgres or SQLite as volume grows.
+- **Scale.** The Blob/JSON storage suits a small shop (up to a few thousand orders). Move to a database such as Neon Postgres as volume grows.

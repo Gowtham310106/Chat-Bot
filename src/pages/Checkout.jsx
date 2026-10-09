@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useStore } from '../context/StoreContext'
 import { api } from '../lib/api'
 import { PAYMENT_LABELS } from '../lib/format'
+import Img from '../components/Img'
 
 const FIELDS = [
   ['name', 'Full name', 'text', 'name', true],
@@ -94,7 +95,7 @@ export default function Checkout() {
         <h2>Order summary</h2>
         {cart.lines.map(({ product, size, qty }) => (
           <div className="summary-line" key={`${product.id}-${size}`}>
-            <div className="summary-img"><img src={product.images[0]} alt="" /><span>{qty}</span></div>
+            <div className="summary-img"><Img src={product.images[0]} sizes="64px" /><span>{qty}</span></div>
             <div><strong>{product.name}</strong><p className="muted small">{product.color} / {size}</p></div>
             <span>{money(product.price * qty)}</span>
           </div>

@@ -74,8 +74,7 @@ export const seedSettings = () => ({
   },
 });
 
-export const seedDb = () => ({
+export const seedCatalog = () => ({
   products: seedProducts(),
-  orders: [],
   settings: seedSettings(),
 });

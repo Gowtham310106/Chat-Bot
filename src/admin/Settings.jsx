@@ -48,7 +48,7 @@ export default function Settings() {
 
       <section className="panel">
         <h2>Admin access</h2>
-        <p className="muted">The admin password is set with the <code>ADMIN_PASSWORD</code> environment variable on the server.</p>
+        <p className="muted">The admin username and password are set with the <code>ADMIN_USERNAME</code> and <code>ADMIN_PASSWORD</code> environment variables (Vercel → Project → Settings → Environment Variables). Redeploy after changing them.</p>
       </section>
 
       <section className="panel danger-zone">
