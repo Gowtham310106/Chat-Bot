@@ -1,17 +1,20 @@
 {
-  "name": "chat-bot",
+  "name": "printed-shirts-shop",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "node server/index.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "pnpm build && pnpm start"
   },
   "dependencies": {
+    "express": "^5.2.1",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
