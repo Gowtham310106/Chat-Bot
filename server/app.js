@@ -329,7 +329,7 @@ export function createApp() {
     const status = err.status || err.statusCode || 500;
     if (status >= 500) console.error(err);
     res.set('Cache-Control', 'no-store');
-    res.status(status).json({ error: status >= 500 ? 'Something went wrong.' : err.message });
+    res.status(status).json({ error: status >= 500 && !err.expose ? 'Something went wrong.' : err.message });
   });
 
   app.use('/api', api);

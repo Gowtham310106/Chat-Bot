@@ -24,15 +24,20 @@ The site is configured for Vercel (`vercel.json`):
 - `api/[...path].js` is a single Vercel Function that runs the Express API.
 - Data is stored in **Vercel Blob**. The product catalog and settings are one JSON document, and each order is its own document. Writes use ETag checks so two checkouts can't overwrite each other's stock changes.
 
-Project environment variables:
+### Setup checklist
 
-| Variable                | Purpose                                                          |
-| ----------------------- | ---------------------------------------------------------------- |
-| `ADMIN_USERNAME`        | Admin login username                                             |
-| `ADMIN_PASSWORD`        | Admin login password                                             |
-| `AUTH_SECRET`           | Random string used to sign admin sessions                        |
-| `DATA_PREFIX`           | Secret folder name in Blob for the catalog and orders. Keep it private. |
-| `BLOB_READ_WRITE_TOKEN` | Added automatically when the Blob store is connected             |
+1. Import the GitHub repo in Vercel (**Add New → Project**). Build settings come from `vercel.json`.
+2. **Storage → Create → Blob**, then connect it to the project. This adds `BLOB_READ_WRITE_TOKEN`.
+3. **Settings → Environment Variables**: add `ADMIN_USERNAME` and `ADMIN_PASSWORD`.
+4. Redeploy.
+
+| Variable                | Required | Purpose                                                              |
+| ----------------------- | -------- | -------------------------------------------------------------------- |
+| `ADMIN_USERNAME`        | yes      | Admin login username                                                 |
+| `ADMIN_PASSWORD`        | yes      | Admin login password. On Vercel, login is disabled until this is set. |
+| `BLOB_READ_WRITE_TOKEN` | yes      | Added automatically when the Blob store is connected                 |
+| `AUTH_SECRET`           | no       | Session signing key. Derived from the Blob token and password if unset. |
+| `DATA_PREFIX`           | no       | Secret Blob folder for the catalog and orders. Derived from the Blob token if unset; don't change it after launch. |
 
 Redeploy after changing environment variables.
 

@@ -3,9 +3,14 @@
 // each order is its own document so concurrent checkouts never overwrite each other.
 // Data files sit under a secret, unguessable prefix and are always read with useCache: false.
 import { BlobNotFoundError, BlobPreconditionFailedError, get, list, put, del } from '@vercel/blob';
+import crypto from 'node:crypto';
 import { Conflict } from './errors.js';
 
-const PREFIX = (process.env.DATA_PREFIX || 'store-data').replace(/\/+$/, '') + '/';
+// Secret folder for data files; derived from the Blob token unless DATA_PREFIX is set. Never change it
+// after launch, or the store will start from the demo catalog again.
+const PREFIX = (process.env.DATA_PREFIX
+  || `store-data-${crypto.createHash('sha256').update(`data:${process.env.BLOB_READ_WRITE_TOKEN}`).digest('hex').slice(0, 24)}`)
+  .replace(/\/+$/, '') + '/';
 const CATALOG = `${PREFIX}catalog.json`;
 const ORDERS = `${PREFIX}orders/`;
 const JSON_OPTS = { access: 'public', contentType: 'application/json', addRandomSuffix: false, cacheControlMaxAge: 60 };
