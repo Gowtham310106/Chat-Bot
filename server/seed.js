@@ -56,7 +56,7 @@ export const seedSettings = () => ({
     image: '/images/hero.jpg',
     eyebrow: 'New drop — Season 01',
     title: 'Printed for\nthe grind.',
-    subtitle: 'Heavyweight tees with bold, black-and-white prints. Made to train in, made to be seen in.',
+    subtitle: 'Heavyweight tees with bold prints. Made to train in, made to be seen in.',
     ctaLabel: 'Shop the drop',
     ctaLink: '/shop',
   },
@@ -69,8 +69,8 @@ export const seedSettings = () => ({
     { id: 'v2', title: 'On the Floor — 02', caption: 'Worn in training. Built to last.', type: 'none', src: '', poster: '/images/video-poster-2.jpg' },
   ],
   about: {
-    title: 'Black. White. Nothing in between.',
-    body: 'We print a small range of heavyweight tees in two colours and a lot of conviction. Every design is screen printed in small batches so the ink sits right and the shirt holds its shape — rep after rep, wash after wash.',
+    title: 'Made to train in. Made to last.',
+    body: 'We design and print heavyweight tees for training and everyday wear. Every design is screen printed in small batches so the ink sits right and the shirt holds its shape — rep after rep, wash after wash.',
   },
 });
 
@@ -78,3 +78,17 @@ export const seedCatalog = () => ({
   products: seedProducts(),
   settings: seedSettings(),
 });
+
+// Earlier default copy implied the shop only sells black and white shirts (black and white is just the
+// site's theme). Stores still holding those untouched defaults get the corrected text.
+const OUTDATED_COPY = [
+  ['hero', 'subtitle', 'Heavyweight tees with bold, black-and-white prints. Made to train in, made to be seen in.', 'Heavyweight tees with bold prints. Made to train in, made to be seen in.'],
+  ['about', 'title', 'Black. White. Nothing in between.', 'Made to train in. Made to last.'],
+  ['about', 'body', 'We print a small range of heavyweight tees in two colours and a lot of conviction. Every design is screen printed in small batches so the ink sits right and the shirt holds its shape — rep after rep, wash after wash.', 'We design and print heavyweight tees for training and everyday wear. Every design is screen printed in small batches so the ink sits right and the shirt holds its shape — rep after rep, wash after wash.'],
+];
+
+export function upgradeDefaultCopy(settings) {
+  for (const [section, key, from, to] of OUTDATED_COPY) {
+    if (settings?.[section]?.[key] === from) settings[section][key] = to;
+  }
+}

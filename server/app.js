@@ -3,7 +3,7 @@
 import crypto from 'node:crypto';
 import express from 'express';
 import { checkCredentials, issueToken, verifyToken } from './auth.js';
-import { seedCatalog } from './seed.js';
+import { seedCatalog, upgradeDefaultCopy } from './seed.js';
 import * as db from './storage/index.js';
 
 const ORDER_STATUSES = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
@@ -30,7 +30,10 @@ const newId = (prefix) => `${prefix}${Date.now().toString(36)}${crypto.randomByt
 
 async function getCatalog() {
   const found = await db.readCatalog();
-  if (found) return found;
+  if (found) {
+    upgradeDefaultCopy(found.data.settings);
+    return found;
+  }
   const data = seedCatalog();
   try {
     await db.writeCatalog(data, null);

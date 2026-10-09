@@ -1,6 +1,6 @@
 # ELITE — Printed Shirts Store
 
-A black-and-white, minimal e-commerce site for printed shirts. It has a customer storefront and an admin panel.
+An e-commerce site for printed shirts, with a minimal black-and-white website theme. It has a customer storefront and an admin panel.
 
 - **Frontend:** React 19, Vite, React Router
 - **Backend:** Express 5 with a JSON-file database (`data/db.json`) and local media uploads (`data/uploads/`)

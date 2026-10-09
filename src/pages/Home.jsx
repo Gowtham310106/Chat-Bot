@@ -5,7 +5,7 @@ import { ArrowIcon, InstagramIcon } from '../components/Icons'
 import { useStore } from '../context/StoreContext'
 import Img from '../components/Img'
 
-const MARQUEE = ['Heavyweight cotton', 'Screen printed', 'Small batches', 'Black & white only', 'Made to train in']
+const MARQUEE = ['Heavyweight cotton', 'Screen printed', 'Small batches', 'Bold prints', 'Made to train in']
 
 export default function Home() {
   const { settings, products } = useStore()
